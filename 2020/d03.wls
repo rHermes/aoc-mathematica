@@ -3,23 +3,14 @@
 
 input = Characters /@ Import[FileNameJoin[{Directory[], "d03.input"}], "List"];
 
-
-{h, w} = Dimensions[input];
-ans1 = Count[Table[input[[i + 1, Mod[3 i, w] + 1]], {i, 0, h - 1}], "#"];
-
-
-ans2 = Times @@ Table[
-    Count[
-        Map[
-            (* Wrap the positions *)
-            input[[#[[1]] + 1, Mod[#[[2]], w] + 1]]&,
-            (* Construct a list of positions. *)
-            NestWhileList[# + x&, {0, 0}, #[[1]] < h&, 1, Infinity, -1]
-        ],
-        "#"
-    ], {x, {{1, 1}, {1, 3}, {1, 5}, {1, 7}, {2, 1}}}
-];
+solutions = Table[Count[Table[
+    input[[
+        Mod[s[[2]] * i - (s[[2]] - 1), Length[input], 1],
+        Mod[s[[1]] * i - (s[[1]] - 1), Length[input[[i]]], 1]
+    ]],
+    {i, 1, Length[input] / s[[2]]}
+], "#"], {s, {{1, 1}, {3, 1}, {5, 1}, {7, 1}, {1, 2}}}];
 
 
-Print["Part 1: ", ans1];
-Print["Part 2: ", ans2];
+Print["Part 1: ", solutions[[2]]];
+Print["Part 2: ", Times @@ solutions];
