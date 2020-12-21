@@ -1,7 +1,7 @@
 #!/usr/bin/env wolframscript
 (* ::Package:: *)
 
-input = Characters /@ Import[FileNameJoin[{Directory[], "d03.input"}], "List"];
+input = Characters /@ Import[FileNameJoin[{Directory[], "input_d03.txt"}], "List"];
 
 solutions = Table[Count[Table[
     input[[

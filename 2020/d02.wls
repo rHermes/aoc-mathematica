@@ -2,7 +2,7 @@
 (* ::Package:: *)
 
 input = StringSplit[
-    Import[FileNameJoin[{Directory[], "d02.input"}], "List"],
+    Import[FileNameJoin[{Directory[], "input_d02.txt"}], "List"],
     Alternatives[" ", ":", "-"]
 ];
 
